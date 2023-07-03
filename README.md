@@ -1,5 +1,7 @@
 # AutomateEvergreenPackaging
-This is my first draft of a script that leverages the Evergreen PowerShell module and Cloudpager module to automatically package and patch applications using Numecent Cloudpaging Studio for packaging and Cloudpager for deployment.
+
+<h3>Overview</h3>
+This is my first draft of a script that leverages the Evergreen PowerShell module and Cloudpager module to automatically package and patch applications using Numecent Cloudpaging Studio for packaging and Cloudpager for deployment. Combining these technologies can provide a solution to automatically package application and patches plus deploy to your early adopters automatically. Thank to Cloudpager's unique rapid rollback feature, you can also have confidence that any changes made that need to be rolled back, can be rolled back quickly and easily. As the application are packaged into application containers before deployment, the rollback and any removal should always be clean and net-new deployments and application updates are delivered dynamically and seamlessly to the users.
 
 <h3>Setting Up Evergreen Packaging Machine</h3>
 
@@ -47,7 +49,9 @@ Power back on the VM and run your script for the first time.
 
 Here is a common example you may use:
 
+```
 .\AutomateEvergreenPackaging.ps1 -AppName "GoogleChrome" -Publisher "Google" -Sourcepackagetype "msi" -Sourcechannel "stable" -image_file_path "<PathToImageFile" -CommandLine "C:\Program Files\Google\Chrome\Application\chrome.exe" -Description "Google Chrome is the world's most popular web browser." -WorkpodID "<WorkdpodID>"
+```
 
 Before running this, you will want to get a decent icon image for the application. I tend to use .png files that are around 512 x 512 in size. The WorkdpodID is optional, this is only used when you wish to auto-deploy the new package to a Workpod. I always auto-deploy my applications and patches to an Early Adopters Workpod that contains a subset of my users. This way, if the vendor makes a big change to their application and it upsets users, it won't impact the entire organization. If you do not have a Workpod yet, you can create one via the Cloudpager Admin portal or via PowerShell. To retrieve your WorkpodID, use the Cloudpager PowerShell Module e.g. Get-CloudpagerWorkpod -SubscriptionKey "<CloudpagerAPIKey>" -Name "<WorkpodName>"
 
