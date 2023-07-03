@@ -1,7 +1,7 @@
 # AutomateEvergreenPackaging
 This is my first draft of a script that leverages the Evergreen PowerShell module and Cloudpager module to automatically package and patch applications using Numecent Cloudpaging Studio for packaging and Cloudpager for deployment.
 
-<b>Setting Up Evergreen Packaging Machine</b>
+<h3>Setting Up Evergreen Packaging Machine</h3>
 
 I have only tested the script on Windows 10 Enterprise. It should work on a machine that is domain joined or non-domain joined. Typically, the preference for pacakging VMs is that they should be non-domain joined to avoid unncessary noise polluting packages. 
 
@@ -35,7 +35,22 @@ With the pre-requisites all now on your VM, you should open the main script to p
 
 You will need to input your API Key and you can optionally step through the script, uncomment some of the optional sections and put in other variables such as your OpenAI API key (if you have one) and a Teams Channel Webhook URI.
 
-You will also require the Evergreen PowerShell Module which is a public community module used to retrieving application data from vendors such as Application Version and Download URIs. You can install this with Install-Module Evergreen.
+When you had edited the PowerShell script and input your API key. It is a good idea to reboot the VM at least once and ensure services were stopped correctly, UAC is disabled etc. When ready, shutdown and save a snapshot of your VM.
 
-![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/4854f523-abff-4979-9561-160a4c138310)
+![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/01863af7-9144-43c9-8209-9c7deadc37d2)
 
+Power back on the VM and run your script for the first time.
+
+![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/38d5e773-40d7-4e84-b1ff-16f2136b2da0)
+
+<h3>Using the Script</h3>
+
+Here is a common example you may use:
+
+.\AutomateEvergreenPackaging.ps1 -AppName "GoogleChrome" -Publisher "Google" -Sourcepackagetype "msi" -Sourcechannel "stable" -image_file_path "<PathToImageFile" -CommandLine "C:\Program Files\Google\Chrome\Application\chrome.exe" -Description "Google Chrome is the world's most popular web browser." -WorkpodID "<WorkdpodID>"
+
+Before running this, you will want to get a decent icon image for the application. I tend to use .png files that are around 512 x 512 in size. The WorkdpodID is optional, this is only used when you wish to auto-deploy the new package to a Workpod. I always auto-deploy my applications and patches to an Early Adopters Workpod that contains a subset of my users. This way, if the vendor makes a big change to their application and it upsets users, it won't impact the entire organization. If you do not have a Workpod yet, you can create one via the Cloudpager Admin portal or via PowerShell. To retrieve your WorkpodID, use the Cloudpager PowerShell Module e.g. Get-CloudpagerWorkpod -SubscriptionKey "<CloudpagerAPIKey>" -Name "<WorkpodName>"
+
+There are some additional tips you will need when working with the script such as the name currently must match the name listed in the Evergreen PowerShell Module and if the vendor media you select from the Evergreen PowerShell module is an msi, you do not require to pass -Arguments but if it is an exe, you will need to pass arguments to achieve a silent installation.
+
+For a full explanation of this script and how it works, sign up to the Cloudpaging User Group and request access to the Slack Workspace for previous recordings. Join Now: https://www.meetup.com/cloudpaging-user-group/ 
