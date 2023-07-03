@@ -10,7 +10,7 @@ I put info at the bottom of this document to get a video of me walking through t
 
 <h3>Disclaimer</h3>
 
-I created this whilst working for Numecent but this was done independently. I created this as a test case for the Cloudpager API and to enhance my own pre-existing automated application packaging and patching solution. Whilst you are free to take this script and use it as you see fit, this is not a Numecent creation and you should not contact Numecent support about this script.
+During my time at Numecent, I developed this project independently. It served as a trial for the Cloudpager API and an improvement to my existing automated application packaging and patching system. Although you are welcome to utilize this script as you wish, please note that it is not an official product of Numecent, and contacting Numecent support regarding this script is unnecessary.
 
 <h3>Setting Up Evergreen Packaging Machine</h3>
 
