@@ -1,7 +1,22 @@
 # AutomateEvergreenPackaging
-This is my first draft of a script that leverages the Evergreen PowerShell module and Cloudpager module to automatically package and patch applications
+This is my first draft of a script that leverages the Evergreen PowerShell module and Cloudpager module to automatically package and patch applications using Numecent Cloudpaging Studio for packaging and Cloudpager for deployment.
 
-To use the script, you will first need to get the Cloudpager PowerShell module from Numecent and the Cloudpaging Studio. I recommend following Numecent's guidance on prepping your packaging VM. https://github.com/numecent
+<b>Setting Up Evergreen Packaging Machine</b>
+
+I have only tested the script on Windows 10 Enterprise. It should work on a machine that is domain joined or non-domain joined. Typically, the preference for pacakging VMs is that they should be non-domain joined to avoid unncessary noise polluting packages. 
+
+![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/4697b8ec-1fa8-4c41-94b9-54004b3549d8)
+
+On your Windows 10 VM, install Cloudpaging Studio. This will be used for packaging the applications and patches into application containers. You can find the latest version of Studio on the Numecent customer support portal.
+
+![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/7d2d2610-da11-43c8-bc29-cf161776c671)
+
+To use the script, you will need to get the Cloudpager PowerShell module from Numecent and you will need to contact support to retrieve your tenant's unique API key. To ensure you can use the PowerShell module in the script as needed, I recommend placing the module in your Modules directory on your VM e.g. C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Cloudpager.
+
+Next step, run the SetupScript.ps1 that is on my GitHub repository, this will create the directories for your packaging projects and it will download the relevant scripts.
+
+
+You should I recommend following Numecent's guidance on prepping your packaging VM. https://github.com/numecent
 
 You will also require the Evergreen PowerShell Module which is a public community module used to retrieving application data from vendors such as Application Version and Download URIs. You can install this with Install-Module Evergreen.
 
