@@ -2,8 +2,7 @@
 .SYNOPSIS
     Creates auto-packaging directories on packaging VM and downloads scripts.
 .DESCRIPTION
-    This script will create the packaging directories for you and download scripts. I could have also used this script to run the CloudpagingStudio-prep but I feel it is important that the person setting this up do it manually so they have awareness
-    of what it is doing.
+    This script will create the packaging directories for you and download scripts.
 #>
 
 $webClient = New-Object System.Net.WebClient
@@ -11,11 +10,11 @@ $webClient = New-Object System.Net.WebClient
 $NIPDirectory = "C:\NIP_Software"
 $NIPScriptsDirectory = "$NIPDirectory\Scripts"
 
-$PrepScript = "https://github.com/Numecent/Automated-Packaging/blob/master/CloudpagingStudio-prep.ps1"
-$NIPScript = "https://github.com/Numecent/Automated-Packaging/blob/master/studio-nip.ps1"
-$JSONScript = "https://github.com/Numecent/Automated-Packaging/blob/Powershell-json-generation/Powershell-Generator/NIP_Software/Scripts/CreateJson.ps1"
-$AutoInstallScript = 'https://github.com/Numecent/Automated-Packaging/blob/Powershell-json-generation/Powershell-Generator/NIP_Software/Scripts/Auto_Install_from_json.ps1'
-$AutopackageScript = "https://github.com/Rorymon/AutomateEvergreenPackaging/blob/main/AutomateEvergreenPackaging.ps1"
+$PrepScript = "https://raw.githubusercontent.com/Numecent/Automated-Packaging/master/CloudpagingStudio-prep.ps1"
+$NIPScript = "https://raw.githubusercontent.com/Numecent/Automated-Packaging/master/studio-nip.ps1"
+$JSONScript = "https://raw.githubusercontent.com/Numecent/Automated-Packaging/Powershell-json-generation/Powershell-Generator/NIP_Software/Scripts/CreateJson.ps1"
+$AutoInstallScript = 'https://raw.githubusercontent.com/Numecent/Automated-Packaging/Powershell-json-generation/Powershell-Generator/NIP_Software/Scripts/Auto_Install_from_json.ps1'
+$AutopackageScript = "https://raw.githubusercontent.com/Rorymon/AutomateEvergreenPackaging/main/AutomateEvergreenPackaging.ps1"
 
 If(!(test-path $NIPDirectory))
 {
