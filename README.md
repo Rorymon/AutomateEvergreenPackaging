@@ -23,7 +23,7 @@ To use the script, you will need to get the Cloudpager PowerShell module from Nu
 
 ![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/1c52585e-4af7-4d55-8af5-8ec9e9b89591)
 
-Next step, run the SetupScript.ps1 that is on my GitHub repository, this will create the directories for your packaging projects and it will download the relevant scripts.
+Next step, run the SetupScript.ps1 that is on my GitHub repository (https://github.com/Rorymon/AutomateEvergreenPackaging/blob/main/SetupScript.ps1), this will create the directories for your packaging projects and it will download the relevant scripts.
 
 ![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/678dedf0-cfa5-4c0f-8749-779015af7eb7)
 
@@ -31,7 +31,7 @@ Next, install the Evergreen PowerShell Module e.g. Install-Module Evergreen
 
 ![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/70fffbef-3251-4408-aee2-ff9e8aea1c7c)
 
-You should I recommend following Numecent's guidance on prepping your packaging VM. https://github.com/numecent using the prep script on the Numecent github repo. 
+You should I recommend following Numecent's guidance on prepping your packaging VM. [https://github.com/numecent](https://github.com/Numecent/Automated-Packaging/blob/master/CloudpagingStudio-prep.ps1) using the prep script on the Numecent github repo. 
 
 ![image](https://github.com/Rorymon/AutomateEvergreenPackaging/assets/7652987/775950de-9b34-4496-b230-d36e76a968d9)
 
