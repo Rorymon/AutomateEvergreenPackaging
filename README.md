@@ -3,6 +3,10 @@
 <h3>Overview</h3>
 This is my first draft of a script that leverages the Evergreen PowerShell module and Cloudpager module to automatically package and patch applications using Numecent Cloudpaging Studio for packaging and Cloudpager for deployment. Combining these technologies can provide a solution to automatically package application and patches plus deploy to your early adopters automatically. Thank to Cloudpager's unique rapid rollback feature, you can also have confidence that any changes made that need to be rolled back, can be rolled back quickly and easily. As the application are packaged into application containers before deployment, the rollback and any removal should always be clean and net-new deployments and application updates are delivered dynamically and seamlessly to the users.
 
+<h3>Disclaimer</h3>
+
+I created this whilst working for Numecent but this was done independently. I created this as a test case for the Cloudpager API and to enhance my own pre-existing automated application packaging and patching solution. Whilst you are free to take this script and use it as you see fit, this is not a Numecent creation and you should not contact Numecent support about this script.
+
 <h3>Setting Up Evergreen Packaging Machine</h3>
 
 I have only tested the script on Windows 10 Enterprise. It should work on a machine that is domain joined or non-domain joined. Typically, the preference for pacakging VMs is that they should be non-domain joined to avoid unncessary noise polluting packages. 
