@@ -1,4 +1,4 @@
-<#
+ <#
 .SYNOPSIS
     Auto-package Applications for Cloudpager.
 .DESCRIPTION
@@ -25,11 +25,16 @@
     If you wish to automatically publish the application to a Cloudpager Workdpod, pass the WorkpodID here e.g. You may have an early adopters Workpod for UAT.
 .PARAMETER Description
     If you would like to set a description for the application, do this here.
+.PARAMETER RegistryExclusions
+    Add any extra registry exclusions comma seperated
+.PARAMETER FileExclusion
+    Add any extra file exclusions comma seperated
 .REQUIRES PowerShell Version 5.0, Cloudpager and Evergreen PowerShell modules are required, the PowerShellAI module is optional. You will require this module if you wish to integrate with the OpenAI
     API. You must have Cloudpaging Studio on the packaging VM along with Numecent's CreateJson.ps1 and studio-nip.ps1. You should run the CloudpagingStudio-prep.ps1 on your packaging VM before taking a snapshot. 
 .EXAMPLE
     >AutomateEvergreenPackaging.ps1 -AppName "GoogleChrome" -publisher "Google" -sourcepackagetype "msi" -sourcechannel "stable" -image_file_path "\\ImageServer\Images\Chrome.png" -CommandLine "C:\Program Files\Google\Chrome\Application\chrome.exe" -WorkpodID "<id>" -Description "Google Chrome is the world's most popular web browser."
     >AutomateEvergreenPackaging.ps1 -AppName "NotepadPlusPlus" -publisher "Don Ho" -sourcepackagetype "exe" -sourceplatform "Windows" -image_file_path "\\ImageServer\Images\NotepadPlusPlus.png" -Arguments " /S" -CommandLine "C:\Program Files\Notepad++\notepad++.exe" -WorkpodID "<id>"
+    >AutomateEvergreenPackaging.ps1 -AppName "GoogleChrome" -publisher "Google" -sourcepackagetype "msi" -sourcechannel "stable" -image_file_path "\\ImageServer\Images\Chrome.png" -CommandLine "C:\Program Files\Google\Chrome\Application\chrome.exe" -WorkpodID "<id>" -Description "Google Chrome is the world's most popular web browser." -FileExclusion "C:\Program Files (x86)\Google\Update\GoogleUpdate.exe" -RegistryExclusions "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\gupdate"," HKEY_CURRENT_USER\\SOFTWARE\\Google"
 #>
 
 Param(
@@ -64,7 +69,15 @@ Param(
    [string]$WorkpodID,
 
    [Parameter(Mandatory=$True)]
-   [string]$Description
+   [string]$Description,
+
+   [Parameter(Mandatory=$false)]
+   [string[]]$RegistryExclusions,
+
+   [Parameter(Mandatory=$false)]
+   [string[]]$FileExclusion
+
+  
 )
 
 #Enter values for these variables before using script
@@ -159,7 +172,10 @@ else
 #Remove comment for the line below and change Description parameter to let OpenAI API populate the Publisher for you.
 #$Description = ai "What is $Publisher $AppName in 30 words or less." | Out-String
 
-.\CreateJson.ps1 -Filepath $DownloadFilePath -Description $Description -Name $FriendlyName -Arguments $Arguments -StudioCommandLine $CommandLine -outputfolder "$ProjectFolder\Output"
+
+
+.\CreateJson.ps1 -Filepath $DownloadFilePath -Description $Description -Name $FriendlyName -Arguments $Arguments -RegistryExclusions $registryexclusions -FileExclusions $fileexclusion -StudioCommandLine $CommandLine -outputfolder "$ProjectFolder\Output" 
+
 
 $config_file_path = Get-ChildItem -Path "C:\NIP_Software\Auto" -Filter *.json | ForEach-Object{$_.FullName}
 
@@ -184,3 +200,4 @@ else
 {
 Write-Output "Latest version of $AppName is already published in Cloudpager"
 }
+ 
